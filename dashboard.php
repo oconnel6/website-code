@@ -87,10 +87,10 @@ $string = json_encode($csv);
     });
 
     var tempChart = buildChart("temp", ["date", "temp"], "°C");
-    var pressureChart = buildChart("pressure", ["date", "pressure"]);
-    var windSpeedChart = buildChart("wind_speed", ["date", "wind_speed"]);
+    var pressureChart = buildChart("pressure", ["date", "pressure"],"hpa");
+    var windSpeedChart = buildChart("wind_speed", ["date", "wind_speed"],"knots");
     var humidityChart = buildChart("humidity", ["date", "humidity"], "%")
-    var rainChart = buildChart("rain", ["date", "rain"])  
+    var rainChart = buildChart("rain", ["date", "rain"],"mm")  
 
     dashboard.bind(dateRangeSlider, tempChart);
     dashboard.bind(dateRangeSlider, pressureChart);
@@ -133,7 +133,7 @@ $string = json_encode($csv);
   
   <body>
     
-    <h1>Weather data for <?php echo($county) ?></h1>
+    <h1>Weather Data for <?php echo($county) ?></h1>
     <div id="filter_div"></div>
 
     <div id="dashboard">
