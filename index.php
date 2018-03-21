@@ -3,11 +3,11 @@
 
   //Auto set page to Dublin in case this page is loaded first
   if (empty($_POST['county'])){
-    $county='Dublin';
+    $county='dublin';
   }
   else{
     // Get county from previous page
-    $county= $_POST['county'];
+    $county= strtolower($_POST['county']);
   }
 
   // Get relevant file and encode in JavaScript
@@ -25,6 +25,11 @@
     }
   }	
 
+  $earliestDate = date_create_from_format("j-M-y", $csv[1][0]); 
+  $earliestDate =  date_format($earliestDate, "Y-m-d");
+
+  $latestDate = date_create_from_format("j-M-y", $csv[count($csv)-1][0]); 
+  $latestDate = date_format($latestDate, "Y-m-d");
   $string= json_encode($csv);
 ?>
 
@@ -50,7 +55,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" style="color: white" href="#"><?php echo $county ?></a>
+          <a class="navbar-brand" style="color: white" href="#"><?php echo strtoupper($county) ?></a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -69,12 +74,14 @@
             <form class="form-inline" action="index.php" method="POST">
               <div class="form-group">
                 <select class="form-control" name="county">
-                  <option value="Cavan">Cavan</option>
-                  <option value="Cork">Cork</option>
-                  <option value="Donegal">Donegal</option>
-                  <option value="Dublin">Dublin</option>
-                  <option value="Galway">Galway</option>
-                  <option value="Roscommon">Roscommon</option>
+		  <option value="carlow">Carlow</option>
+                  <option value="cavan">Cavan</option>
+                  <option value="cork">Cork</option>
+                  <option value="donegal">Donegal</option>
+                  <option value="dublin">Dublin</option>
+                  <option value="galway">Galway</option>
+                  <option value="roscommon">Roscommon</option>
+		  <option value="tipperary">Tipperary</option>
                 </select>
                 <button type="submit" class="btn btn-default">Change County</button>
               </div>
@@ -83,11 +90,11 @@
             <div class="form">
               <div class="form-group">
                 <label for="low_date">Low Date</label>
-                <input type="date" class="form-control" id="low_date">
+		<input min="<?php echo $earliestDate ?>" max="<?php echo $latestDate ?>" type="date" class="form-control" id="low_date">
               </div>
               <div class="form-group">
                 <label for="high_date">High Date</label>
-                <input type="date" class="form-control" id="high_date">
+                <input min="<?php echo $earliestDate ?>" max="<?php echo $latestDate ?>" type="date" class="form-control" id="high_date">
               </div>
               <button onclick="setDate()" class="btn btn-default">Filter</button>
             </div>
@@ -160,7 +167,7 @@
         var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
 
         // Create a range slider to filter date (note this is hidden in favour of date form)
-        var dateRangeSlider = new google.visualization.ControlWrapper({
+        dateRangeSlider = new google.visualization.ControlWrapper({
             'controlType': 'DateRangeFilter',
             'containerId': 'filter_div',
             'options': {
