@@ -269,7 +269,7 @@
         }
 
         // Update the <p> tags which hold the averages
-        document.getElementById("avg_temp").innerHTML = "Average Temp: " + (temp / numDatesCounted).toFixed(2) + " °c";
+        document.getElementById("avg_temp").innerHTML = "Average Temp: " + (temp / numDatesCounted).toFixed(2) + " °C";
         document.getElementById("avg_rain").innerHTML = "Average Rain: " + (rain / numDatesCounted).toFixed(2) + " mm";
         document.getElementById("avg_wind_speed").innerHTML = "Average Wind Speed: " + (windSpeed / numDatesCounted).toFixed(2) + " knotts";
         document.getElementById("avg_pressure").innerHTML = "Average Pressure: " +  (pressure / numDatesCounted).toFixed(2) + " hPa";
