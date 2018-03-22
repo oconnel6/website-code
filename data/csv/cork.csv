@@ -1,4 +1,4 @@
-date,temp,rain,pressure,winds_speed,humidity
+date,temp,rain,pressure,wind_speed,humidity
 01-Jan-00,5.55,0.4,1004,3.7,
 02-Jan-00,7.85,4.3,997.5,10.5,
 03-Jan-00,6.95,0.6,995.2,5,
